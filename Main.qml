@@ -6,11 +6,17 @@ Window {
     visible: true
     title: qsTr("Hello World")
     
-    CustomButton{
-        anchors.centerIn: parent
-        
-        onButtonClicked: {
-            console.log("Button Clicked!")
-        }
-    }
+    // CustomButton{
+    //     anchors.centerIn: parent
+    //     onButtonClicked: {
+    //         console.log("Button Clicked!")
+    //     }
+    // }
+    
+    // PulsingButton{
+    // anchors.centerIn: parent
+    //     onButtonClicked: {
+    //         console.log("Button Clicked!")
+    //     }
+    // }
 }
