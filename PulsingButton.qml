@@ -62,10 +62,10 @@ Item {
         
         text: root.text
         anchors.centerIn: parent
-        topPadding: 15
-        bottomPadding: 15
-        leftPadding: 30
-        rightPadding: 30
+        topPadding: 10
+        bottomPadding: 10
+        leftPadding: 20
+        rightPadding: 20
         font.pointSize: root.fontSize
         color: root.textColor
     }

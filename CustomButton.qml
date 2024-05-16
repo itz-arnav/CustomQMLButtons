@@ -6,7 +6,7 @@ Item {
     id: root
     
     property string color: "#ef3f5f"
-    property double radius: 8.0
+    property double radius: 5.0
     property string text: "Click Me"
     property string textColor: "#fff"
     property int fontSize: 15
@@ -42,10 +42,10 @@ Item {
         
         text: root.text
         anchors.centerIn: parent
-        topPadding: 15
-        bottomPadding: 15
-        leftPadding: 30
-        rightPadding: 30
+        topPadding: 10
+        bottomPadding: 10
+        leftPadding: 20
+        rightPadding: 20
         font.pointSize: root.fontSize
         color: root.textColor
     }

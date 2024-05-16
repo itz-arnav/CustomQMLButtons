@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 
 Window {
     width: 640
@@ -6,17 +7,33 @@ Window {
     visible: true
     title: qsTr("Hello World")
     
-    // CustomButton{
-    //     anchors.centerIn: parent
-    //     onButtonClicked: {
-    //         console.log("Button Clicked!")
-    //     }
-    // }
+    Rectangle{
+        anchors.fill: parent
+        color: "#353535"
+    }
     
-    // PulsingButton{
-    // anchors.centerIn: parent
-    //     onButtonClicked: {
-    //         console.log("Button Clicked!")
-    //     }
-    // }
+    GridLayout{
+        anchors.centerIn: parent
+        columns: 2
+        rowSpacing: 20
+        columnSpacing: 20
+        
+        CustomButton{
+            onButtonClicked: {
+                console.log("Plain Button Clicked!")
+            }
+        }
+        
+        PulsingButton{
+            onButtonClicked: {
+                console.log("Pulsing Button Clicked!")
+            }
+        }
+        
+        SlideHoverButton{
+            onButtonClicked: {
+                console.log("Button Clicked!")
+            }
+        }
+    }
 }
