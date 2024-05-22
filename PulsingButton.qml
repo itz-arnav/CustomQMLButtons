@@ -4,7 +4,7 @@ import QtQuick.Controls.Basic
 Item {
     id: root
     
-    property string color: "#ef3f5f"
+    property string color: "#15C229"
     property double radius: 8.0
     property string text: "Click Me"
     property string textColor: "#fff"
