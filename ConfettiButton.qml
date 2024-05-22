@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Particles 2.15
 
 Rectangle {
-    anchors.fill: parent
 
     Rectangle {
         id: button
@@ -24,18 +23,19 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: confetti.start()
+            onClicked: emitter.burst()
         }
     }
 
     ParticleSystem {
         id: confetti
-        running: false  // Start off not running
+        running: true
 
         Emitter {
+            id: emitter
             anchors.fill: parent
-            emitRate: 10
-            lifeSpan: 800
+            emitRate: 0
+            lifeSpan: 1200
             lifeSpanVariation: 100
             size: 30
             endSize: 50 
@@ -43,19 +43,28 @@ Rectangle {
                 angle: 90
                 angleVariation: 360
                 magnitude: 100
-                magnitudeVariation: 50
+                magnitudeVariation: 80
+            }
+            
+            function burst() {
+                emitter.emitRate = 100;
+                console.log('.')
+                Qt.callLater(function() { 
+                console.log(",")
+                emitter.emitRate = 0;
+                 }, 5000)
             }
         }
 
         ImageParticle {
             source: "qrc:/images/confetti.png"
-            alpha: 1.0  // Full opacity initially
+            alpha: 1.0
 
             Behavior on alpha {
                 NumberAnimation {
                     from: 1.0
-                    to: 0.0  // Fade to transparent
-                    duration: 800  // Match the lifespan of the particle
+                    to: 0.0
+                    duration: 1200
                 }
             }
         }
