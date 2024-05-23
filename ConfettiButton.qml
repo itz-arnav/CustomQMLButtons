@@ -12,6 +12,8 @@ Rectangle {
         // "qrc:/images/confetti_purple.png"
     ]
     
+    signal buttonClicked()
+    
     Rectangle {
         id: button
         width: 200
@@ -34,6 +36,7 @@ Rectangle {
             onClicked: {
                 emitter.enabled = true
                 emitter.burst()
+                buttonClicked()
             }
         }
     }

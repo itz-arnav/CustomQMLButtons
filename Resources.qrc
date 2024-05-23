@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/confetti.png</file>
-        <file>images/confetti.jpg</file>
-        <file>images/c.png</file>
         <file>images/confetti_1.png</file>
         <file>images/confetti_2.png</file>
         <file>images/confetti_3.png</file>

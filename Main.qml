@@ -18,26 +18,28 @@ Window {
         rowSpacing: 30
         columnSpacing: 40
         
-        // CustomButton{
-        //     onButtonClicked: {
-        //         console.log("Plain Button Clicked!")
-        //     }
-        // }
+        CustomButton{
+            onButtonClicked: {
+                console.log("Plain Button Clicked!")
+            }
+        }
         
-        // PulsingButton{
-        //     onButtonClicked: {
-        //         console.log("Pulsing Button Clicked!")
-        //     }
-        // }
+        PulsingButton{
+            onButtonClicked: {
+                console.log("Pulsing Button Clicked!")
+            }
+        }
         
-        // SlideHoverButton{
-        //     onButtonClicked: {
-        //         console.log("Button Clicked!")
-        //     }
-        // }
+        SlideHoverButton{
+            onButtonClicked: {
+                console.log("Button Clicked!")
+            }
+        }
         
         ConfettiButton{
-        
+            onButtonClicked: {
+                console.log("Button Clicked!")
+            }
         }
     }
 }
