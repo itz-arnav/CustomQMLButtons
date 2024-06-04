@@ -14,10 +14,17 @@ Item {
     property string shadowColor: Qt.darker(color, 1.5)
     
     property list<string> imageSources: [
-        "qrc:/images/confetti_1.png",
-        "qrc:/images/confetti_2.png",
-        "qrc:/images/confetti_3.png",
+        // "qrc:/images/confetti_1.png",
+        // "qrc:/images/confetti_2.png",
+        // "qrc:/images/confetti_3.png",
+        "qrc:/images/1.svg",
+        "qrc:/images/2.svg",
+        "qrc:/images/3.svg",
     ]
+    
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
     
     signal buttonClicked()
     
@@ -96,17 +103,7 @@ Item {
         repeat: false
         interval: 1200
         onTriggered: {
-            timer2.stop()
             emitter.enabled = false
-        }
-    }
-    
-    Timer{
-        id: timer2
-        repeat: true
-        interval: 700
-        onTriggered: {
-            imgParticle.source = imageSources[Math.floor(Math.random() * imageSources.length)]
         }
     }
     
@@ -122,8 +119,9 @@ Item {
             emitRate: 0
             lifeSpan: 1000
             lifeSpanVariation: 100
-            size: 5
-            endSize: 10 
+            size: randomInRange(2, 5)
+            endSize: randomInRange(10, 14)
+            
             velocity: AngleDirection {
                 angle: 90
                 angleVariation: 360
@@ -132,9 +130,9 @@ Item {
             }
             
             function burst() {
+                imgParticle.source = imageSources[Math.floor(Math.random() * imageSources.length)]
                 emitter.emitRate = 100;
                 timer.start()
-                timer2.start()
             }
         }
         
@@ -142,12 +140,13 @@ Item {
             id: imgParticle
             source: imageSources[Math.floor(Math.random() * imageSources.length)]
             alpha: 1.0
+            alphaVariation: 1.0
             
             Behavior on alpha {
                 NumberAnimation {
                     from: 1.0
                     to: 0.0
-                    duration: 700
+                    duration: 1000
                 }
             }
         }

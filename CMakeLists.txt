@@ -24,6 +24,7 @@ qt_add_qml_module(appCustomButton
         QML_FILES ConfettiButton.qml
         RESOURCES Resources.qrc
         QML_FILES NeonButton.qml
+        QML_FILES ExpandingBorderButton.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

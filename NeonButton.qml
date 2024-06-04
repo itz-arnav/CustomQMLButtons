@@ -80,7 +80,6 @@ Item {
     
         id: hoverEnterAnimation
         ColorAnimation {
-            id: colorAnimationEnter
             target: backgroundContainer
             property: "color"
             to: borderColor
@@ -95,7 +94,6 @@ Item {
             easing.type: Easing.InOutQuad
         }
         NumberAnimation {
-            id: shadowRadiusAnimationEnter
             target: root
             property: "dropShadowRadius"
             to: 70
@@ -103,7 +101,6 @@ Item {
             easing.type: Easing.InOutQuad
         }
         NumberAnimation {
-            id: shadowSamplesAnimationEnter
             target: root
             property: "dropShadowSamples"
             to: 210
@@ -116,7 +113,6 @@ Item {
     ParallelAnimation {
         id: hoverExitAnimation
         ColorAnimation {
-            id: colorAnimationExit
             target: backgroundContainer
             property: "color"
             to: root.color
@@ -131,7 +127,6 @@ Item {
             easing.type: Easing.InOutQuad
         }
         NumberAnimation {
-            id: shadowRadiusAnimationExit
             target: root
             property: "dropShadowRadius"
             to: 3
@@ -139,7 +134,6 @@ Item {
             easing.type: Easing.InOutQuad
         }
         NumberAnimation {
-            id: shadowSamplesAnimationExit
             target: root
             property: "dropShadowSamples"
             to: 7

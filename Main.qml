@@ -54,5 +54,12 @@ Window {
                 console.log("Neon Button Clicked!")
             }
         }
+        
+        ExpandingBorderButton{
+            text: "Border Button"
+            onButtonClicked: {
+                console.log("Border Button Clicked!")
+            }
+        }
     }
 }
