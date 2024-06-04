@@ -14,9 +14,6 @@ Item {
     property string shadowColor: Qt.darker(color, 1.5)
     
     property list<string> imageSources: [
-        // "qrc:/images/confetti_1.png",
-        // "qrc:/images/confetti_2.png",
-        // "qrc:/images/confetti_3.png",
         "qrc:/images/1.svg",
         "qrc:/images/2.svg",
         "qrc:/images/3.svg",
@@ -111,8 +108,8 @@ Item {
         id: confetti
         running: true
         anchors.fill: parent
+        z: -100
         
-
         Emitter {
             id: emitter
             anchors.fill: parent
@@ -121,6 +118,7 @@ Item {
             lifeSpanVariation: 100
             size: randomInRange(2, 5)
             endSize: randomInRange(10, 14)
+            z: -100
             
             velocity: AngleDirection {
                 angle: 90
@@ -141,6 +139,7 @@ Item {
             source: imageSources[Math.floor(Math.random() * imageSources.length)]
             alpha: 1.0
             alphaVariation: 1.0
+            z: -100
             
             Behavior on alpha {
                 NumberAnimation {
