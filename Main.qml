@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 
 Window {
-    width: 640
-    height: 480
+    width: 800
+    height: 600
     visible: true
     title: qsTr("Hello World")
     
@@ -15,30 +15,43 @@ Window {
     GridLayout{
         anchors.centerIn: parent
         columns: 2
-        rowSpacing: 30
-        columnSpacing: 40
+        rowSpacing: 50
+        columnSpacing: 70
         
         CustomButton{
+            text: "Plain Button"
             onButtonClicked: {
                 console.log("Plain Button Clicked!")
             }
         }
         
         PulsingButton{
+            text: "Pulsing Button"
             onButtonClicked: {
                 console.log("Pulsing Button Clicked!")
             }
         }
         
         SlideHoverButton{
+            text: "Slide Button"
+            
             onButtonClicked: {
-                console.log("Button Clicked!")
+                console.log("Slide Button Clicked!")
             }
         }
         
         ConfettiButton{
+            text: "Confetti Button"
+            
             onButtonClicked: {
-                console.log("Button Clicked!")
+                console.log("Confetti Button Clicked!")
+            }
+        }
+        
+        NeonButton{
+            text: "Neon Button"
+            onButtonClicked: {
+                console.log("Neon Button Clicked!")
             }
         }
     }

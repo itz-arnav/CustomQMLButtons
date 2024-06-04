@@ -4,7 +4,7 @@ import QtQuick.Controls.Basic
 Item {
     id: root
     
-    property string color: "#15C229"
+    property string color: Qt.darker("#ff4d6d", 1.1)
     property double radius: 8.0
     property string text: "Click Me"
     property string textColor: "#fff"
@@ -20,9 +20,9 @@ Item {
     Rectangle {
         id: pulsingBackground
         anchors.fill: parent
-        color: Qt.lighter(root.color, 1.3)
+        color: Qt.lighter(root.color, 1.4)
         radius: parent.width/2
-        
+        opacity: 0.8
         
         ParallelAnimation {
             running: true
