@@ -145,14 +145,14 @@ Item {
             NumberAnimation {
                 target: root
                 property: "dropShadowRadius"
-                to: 70
+                to: 22
                 duration: 300
                 easing.type: Easing.InOutQuad
             }
             NumberAnimation {
                 target: root
                 property: "dropShadowSamples"
-                to: 210
+                to: 50
                 duration: 300
                 easing.type: Easing.InOutQuad
             }

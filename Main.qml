@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 
 Window {
-    width: 800
-    height: 600
+    width: 1000
+    height: 800
     visible: true
     title: qsTr("Hello World")
     
@@ -15,8 +15,8 @@ Window {
     GridLayout{
         anchors.centerIn: parent
         columns: 2
-        rowSpacing: 50
-        columnSpacing: 70
+        rowSpacing: 100
+        columnSpacing: 100
         
         CustomButton{
             text: "Plain Button"

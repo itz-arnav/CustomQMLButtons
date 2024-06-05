@@ -5,12 +5,12 @@ import Qt5Compat.GraphicalEffects
 Item {
     id: root
     
-    property string color: "#ef3f5f"
+    property string color: "#3dccc7"
     property double radius: 5.0
     property string text: "Click Me"
     property string textColor: "#fff"
     property int fontSize: 15
-    property string shadowColor: Qt.darker(color, 1.5)
+    property string shadowColor: Qt.darker(color, 1.6)
     
     signal buttonClicked()
     
@@ -29,8 +29,8 @@ Item {
         layer.effect: DropShadow {
             transparentBorder: true
             color: root.shadowColor
-            radius: 11
-            samples: 20
+            radius: 15
+            samples: 35
             horizontalOffset: 1
             verticalOffset: 1
         }
@@ -60,7 +60,7 @@ Item {
         
         onClicked: root.buttonClicked()
         onEntered: {
-            colorAnimation.to = Qt.darker(backgroundContainer.color, 1.1)
+            colorAnimation.to = Qt.darker(backgroundContainer.color, 1.3)
             colorAnimation.start()
         }
         onExited: {
