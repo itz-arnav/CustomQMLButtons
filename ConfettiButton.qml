@@ -116,8 +116,8 @@ Item {
             emitRate: 0
             lifeSpan: 1000
             lifeSpanVariation: 100
-            size: randomInRange(2, 5)
-            endSize: randomInRange(10, 14)
+            size: randomInRange(2, 4)
+            endSize: randomInRange(6, 9)
             z: -100
             
             velocity: AngleDirection {

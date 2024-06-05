@@ -5,7 +5,7 @@ Item {
     id: root
     
     property string color: Qt.darker("#ff3466", 1.1)
-    property double radius: 8.0
+    property double radius: 20.0
     property string text: "Click Me"
     property string textColor: "#fff"
     property int fontSize: 15
@@ -21,7 +21,7 @@ Item {
         id: pulsingBackground
         anchors.fill: parent
         color: Qt.lighter(root.color, 1.4)
-        radius: parent.width/2
+        radius: root.radius
         opacity: 0.8
         
         ParallelAnimation {
@@ -53,7 +53,7 @@ Item {
         
         anchors.fill: parent
         color: root.color
-        radius: parent.width/2
+        radius: root.radius
     }
     
     //Content label

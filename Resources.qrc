@@ -6,5 +6,6 @@
         <file>images/1.svg</file>
         <file>images/2.svg</file>
         <file>images/3.svg</file>
+        <file>images/check.svg</file>
     </qresource>
 </RCC>
