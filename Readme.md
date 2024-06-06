@@ -29,7 +29,7 @@ To use these buttons in your QML application, follow these steps:
 
 1.	**CustomButton**
  
-		```
+		```qml
 		CustomButton {
 			buttonText: "Plain Button"
 			onButtonClicked: console.log("Plain Button Clicked!")
@@ -37,7 +37,7 @@ To use these buttons in your QML application, follow these steps:
 		```
 2.	 **PulsingButton**
  
-		```
+		```qml
 		PulsingButton {
 			buttonText: "Pulsing Button"
 			onButtonClicked: console.log("Pulsing Button Clicked!")
