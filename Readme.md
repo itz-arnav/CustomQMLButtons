@@ -27,27 +27,22 @@ To use these buttons in your QML application, follow these steps:
 	
 ## Example Usage
 
-1.	**CustomButton**
- 
-		```qml
-		CustomButton {
+**CustomButton**
+
+
+        CustomButton {
 			buttonText: "Plain Button"
 			onButtonClicked: console.log("Plain Button Clicked!")
 		}
-		```
-		```
-		
-		
-2.	 **PulsingButton**
- 
-		```qml
+
+**PulsingButton**
+
 		PulsingButton {
 			buttonText: "Pulsing Button"
 			onButtonClicked: console.log("Pulsing Button Clicked!")
 		}
-		```
 
 
 ## Customization
 
-	Each button can be customized with different properties such as buttonText, color, radius, and more, depending on the design of the button. Refer to the documentation within each button's QML file for more details on what properties can be customized.
+Each button can be customized with different properties such as buttonText, color, radius, and more, depending on the design of the button. Refer to the documentation within each button's QML file for more details on what properties can be customized.
