@@ -5,7 +5,7 @@ This repository contains a collection of custom animated buttons designed for Qt
 ## Prerequisites
 
 Ensure you have the following installed:
-- [Qt](https://www.qt.io/download) (6.5.1 or later recommended) (Ensure to have Qt Compat Modules also installed)
+- [Qt](https://www.qt.io/download) (6.5.1 or later recommended) (Ensure to have Qt5 Compat Modules also installed)
 - [Qt Creator](https://www.qt.io/product/development-tools) for easy project management and UI design
 
 ## How to Use
@@ -25,7 +25,7 @@ To use these buttons in your QML application, follow these steps:
 3.	**Use the Buttons in Your Project:**
 	You can instantiate any of the custom buttons directly in your QML files. Below are examples of how to integrate these buttons into your application. Ensure that each button component file is imported if they are not in the same directory.
 	
-##Example Usage
+## Example Usage
 
 	**CustomButton**
  
@@ -44,6 +44,6 @@ To use these buttons in your QML application, follow these steps:
 		}
 		```
 	
-##Customization
+## Customization
 
 	Each button can be customized with different properties such as buttonText, color, radius, and more, depending on the design of the button. Refer to the documentation within each button's QML file for more details on what properties can be customized.
