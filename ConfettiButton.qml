@@ -6,35 +6,34 @@ import Qt5Compat.GraphicalEffects
 Item {
     id: root
     
-    property string color: "#0496ff"
-    property double radius: 5.0
-    property string text: "Celebrate"
-    property string textColor: "#fff"
+    property string baseColor: "#0496ff"
+    property double borderRadius: 5.0
+    property string buttonText: "Celebrate"
+    property color textColor: "#ffffff"
     property int fontSize: 15
-    property string shadowColor: Qt.darker(color, 1.5)
-    
+    property color shadowColor: Qt.darker(baseColor, 1.5)
     property list<string> imageSources: [
         "qrc:/images/1.svg",
         "qrc:/images/2.svg",
-        "qrc:/images/3.svg",
+        "qrc:/images/3.svg"
     ]
+    
+    signal buttonClicked()
+    
+    width: label.width + label.leftPadding + label.rightPadding
+    height: label.height + label.topPadding + label.bottomPadding
+    
     
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
     }
     
-    signal buttonClicked()
-    
-    width: contentWrapper.width + contentWrapper.leftPadding + contentWrapper.rightPadding
-    height: contentWrapper.height + contentWrapper.topPadding + contentWrapper.bottomPadding
-    
-    //Background rectangle
-    Rectangle{
-        id: backgroundContainer
-        
+    // Background rectangle with shadow
+    Rectangle {
+        id: background
         anchors.fill: parent
-        color: root.color
-        radius: root.radius
+        color: root.baseColor
+        radius: root.borderRadius
         
         layer.enabled: true
         layer.effect: DropShadow {
@@ -47,11 +46,10 @@ Item {
         }
     }
     
-    //Content label
-    Label{
-        id: contentWrapper
-        
-        text: root.text
+    // Text label
+    Label {
+        id: label
+        text: root.buttonText
         anchors.centerIn: parent
         topPadding: 10
         bottomPadding: 10
@@ -61,64 +59,49 @@ Item {
         color: root.textColor
     }
     
-    //Handling Mouse Events
-    MouseArea{
-        id: mouseEventWrapper
-        
+    // Mouse area for interaction
+    MouseArea {
+        id: interactionArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
         
         onClicked: {
-            emitter.enabled = true
-            emitter.burst()
+            confettiEmitter.enabled = true
+            confettiEmitter.burst()
             root.buttonClicked()
         }
         
-        onEntered: {
-            colorAnimation.to = Qt.darker(backgroundContainer.color, 1.1)
-            colorAnimation.start()
-        }
-        onExited: {
-            colorAnimation.to = root.color
-            colorAnimation.start()
-        }
+        onEntered: hoverAnimation.to = Qt.darker(background.color, 1.1)
+        onExited: hoverAnimation.to = root.baseColor
     }
     
-    //Colour animation for hover effects
+    // Color animation for hover effects
     ColorAnimation {
-        id: colorAnimation
-        
-        target: backgroundContainer
+        id: hoverAnimation
+        target: background
         property: "color"
         duration: 300
         easing.type: Easing.InOutQuad
     }
     
-    Timer{
-        id: timer
-        repeat: false
-        interval: 1200
-        onTriggered: {
-            emitter.enabled = false
-        }
-    }
-    
+    // Particle system for confetti effect
     ParticleSystem {
-        id: confetti
+        id: confettiSystem
         running: true
         anchors.fill: parent
-        z: -100
-        
+        z: -1
+
         Emitter {
-            id: emitter
+            id: confettiEmitter
             anchors.fill: parent
+            enabled: false
             emitRate: 0
             lifeSpan: 1000
             lifeSpanVariation: 100
             size: randomInRange(2, 4)
             endSize: randomInRange(6, 9)
-            z: -100
+            z: -1
             
             velocity: AngleDirection {
                 angle: 90
@@ -129,18 +112,16 @@ Item {
             
             function burst() {
                 imgParticle.source = imageSources[Math.floor(Math.random() * imageSources.length)]
-                emitter.emitRate = 100;
-                timer.start()
+                emitRate = 100
+                confettiTimer.start()
             }
         }
         
         ImageParticle {
             id: imgParticle
-            source: imageSources[Math.floor(Math.random() * imageSources.length)]
+            source: imageSources[0]
             alpha: 1.0
-            alphaVariation: 1.0
-            z: -100
-            
+            alphaVariation: 0.5
             Behavior on alpha {
                 NumberAnimation {
                     from: 1.0
@@ -148,6 +129,13 @@ Item {
                     duration: 1000
                 }
             }
+        }
+        
+        Timer {
+            id: confettiTimer
+            interval: 1200
+            repeat: false
+            onTriggered: confettiEmitter.enabled = false
         }
     }
 }

@@ -1,198 +1,205 @@
 import QtQuick 
 import QtQuick.Controls.Basic
 import Qt5Compat.GraphicalEffects
-
 Item {
-    id: root
-    property color bordercolor: "#ef3f5f"
-    property string color: "transparent"
-    property double radius: 5.0
-    property string text: "Click Me"
-    property string textColor: "#fff"
+    id: interactiveButton
+    
+    property color borderColor: "#ef3f5f"
+    property color baseColor: "#353535"
+    property double borderRadius: 5.0
+    property string buttonText: "Click Me"
+    property color textColor: "#ffffff"
     property int fontSize: 15
     property real borderTopWidth: 0.15 * width
     property real borderLeftWidth: 0.15 * height
     property real borderDownWidth: 0.15 * width
     property real borderRightWidth: 0.15 * height
-    property int dropShadowRadius: 0
-    property int dropShadowSamples: 0
+    property int shadowRadius: 0
+    property int shadowSamples: 0
     
     signal buttonClicked()
     
-    width: contentWrapper.width + contentWrapper.leftPadding + contentWrapper.rightPadding
-    height: contentWrapper.height + contentWrapper.topPadding + contentWrapper.bottomPadding
+    width: textLabel.width + textLabel.leftPadding + textLabel.rightPadding
+    height: textLabel.height + textLabel.topPadding + textLabel.bottomPadding
     
     states: [
         State {
             name: "hovered"
             PropertyChanges {
-                target: root
+                target: interactiveButton
                 borderTopWidth: width
                 borderLeftWidth: height
                 borderDownWidth: width
                 borderRightWidth: height
+                shadowRadius: 22
+                shadowSamples: 50
             }
         }
     ]
     
-    //Background rectangle
-    Rectangle{
-        id: backgroundContainer
-        
+    Rectangle {
+        id: background
         anchors.fill: parent
-        color: "#353535"
+        color: interactiveButton.baseColor
+        radius: interactiveButton.borderRadius
         
         layer.enabled: true
         layer.effect: DropShadow {
             transparentBorder: true
-            color: root.bordercolor
-            radius: dropShadowRadius
-            samples: dropShadowSamples
+            color: interactiveButton.borderColor
+            radius: interactiveButton.shadowRadius
+            samples: interactiveButton.shadowSamples
         }
     }
     
-    //Content label
-    Label{
-        id: contentWrapper
-        
-        text: root.text
+    Label {
+        id: textLabel
+        text: interactiveButton.buttonText
         anchors.centerIn: parent
         topPadding: 10
         bottomPadding: 10
         leftPadding: 20
         rightPadding: 20
-        font.pointSize: root.fontSize
-        color: root.textColor
+        font.pointSize: interactiveButton.fontSize
+        color: interactiveButton.textColor
     }
     
+    // Handling mouse events
     MouseArea {
-        id: mouseArea
+        id: interactionArea
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         
-        onEntered: {
-            root.state = "hovered"
+        onClicked: {
+            interactiveButton.buttonClicked()
         }
-        onExited: {
-            root.state = ""
-        }
+        onEntered: interactiveButton.state = "hovered"
+        onExited: interactiveButton.state = ""
     }
     
+    // Border rectangles for visual effect
     Rectangle {
-        width: root.borderTopWidth
+        width: interactiveButton.borderTopWidth
         height: 2
-        color: root.bordercolor
+        color: interactiveButton.borderColor
         anchors.top: parent.top
         anchors.left: parent.left
     }
     
     Rectangle {
         width: 2
-        height: root.borderLeftWidth
-        color: root.bordercolor
+        height: interactiveButton.borderLeftWidth
+        color: interactiveButton.borderColor
         anchors.top: parent.top
         anchors.left: parent.left
     }
     
     Rectangle {
-        width: root.borderDownWidth
+        width: interactiveButton.borderDownWidth
         height: 2
-        color: root.bordercolor
+        color: interactiveButton.borderColor
         anchors.bottom: parent.bottom
         anchors.right: parent.right
     }
     
     Rectangle {
         width: 2
-        height: root.borderRightWidth
-        color: root.bordercolor
+        height: interactiveButton.borderRightWidth
+        color: interactiveButton.borderColor
         anchors.bottom: parent.bottom
         anchors.right: parent.right
     }
     
-    MouseArea{
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        
-        onClicked: root.buttonClicked()
-    }
+    
     
     transitions: [
         Transition {
             from: ""
             to: "hovered"
-            PropertyAnimation {
-                target: root
-                property: "borderTopWidth"
-                duration: 300
-            }
-            PropertyAnimation {
-                target: root
-                property: "borderLeftWidth"
-                duration: 300
-            }
-            PropertyAnimation {
-                target: root
-                property: "borderDownWidth"
-                duration: 300
-            }
-            PropertyAnimation {
-                target: root
-                property: "borderRightWidth"
-                duration: 300
-            }
-            NumberAnimation {
-                target: root
-                property: "dropShadowRadius"
-                to: 22
-                duration: 300
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: root
-                property: "dropShadowSamples"
-                to: 50
-                duration: 300
-                easing.type: Easing.InOutQuad
+            ParallelAnimation {
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderTopWidth"
+                    to: width
+                    duration: 300
+                }
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderLeftWidth"
+                    to: height
+                    duration: 300
+                }
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderDownWidth"
+                    to: width
+                    duration: 300
+                }
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderRightWidth"
+                    to: height
+                    duration: 300
+                }
+                NumberAnimation {
+                    target: interactiveButton
+                    property: "shadowRadius"
+                    to: 22
+                    duration: 300
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: interactiveButton
+                    property: "shadowSamples"
+                    to: 50
+                    duration: 300
+                    easing.type: Easing.InOutQuad
+                }
             }
         },
         Transition {
             from: "hovered"
             to: ""
-            PropertyAnimation {
-                target: root
-                property: "borderTopWidth"
-                duration: 300
-            }
-            PropertyAnimation {
-                target: root
-                property: "borderLeftWidth"
-                duration: 300
-            }
-            PropertyAnimation {
-                target: root
-                property: "borderDownWidth"
-                duration: 300
-            }
-            PropertyAnimation {
-                target: root
-                property: "borderRightWidth"
-                duration: 300
-            }
-            NumberAnimation {
-                target: root
-                property: "dropShadowRadius"
-                to: 0
-                duration: 300
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: root
-                property: "dropShadowSamples"
-                to: 0
-                duration: 300
-                easing.type: Easing.InOutQuad
+            ParallelAnimation {
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderTopWidth"
+                    to: 0.15 * width
+                    duration: 300
+                }
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderLeftWidth"
+                    to: 0.15 * height
+                    duration: 300
+                }
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderDownWidth"
+                    to: 0.15 * width
+                    duration: 300
+                }
+                PropertyAnimation {
+                    target: interactiveButton
+                    property: "borderRightWidth"
+                    to: 0.15 * height
+                    duration: 300
+                }
+                NumberAnimation {
+                    target: interactiveButton
+                    property: "shadowRadius"
+                    to: 0
+                    duration: 300
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: interactiveButton
+                    property: "shadowSamples"
+                    to: 0
+                    duration: 300
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
     ]

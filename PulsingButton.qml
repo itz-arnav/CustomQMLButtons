@@ -2,41 +2,36 @@ import QtQuick
 import QtQuick.Controls.Basic
 
 Item {
-    id: root
-    
-    property string color: Qt.darker("#ff3466", 1.1)
-    property double radius: 20.0
-    property string text: "Click Me"
-    property string textColor: "#fff"
-    property int fontSize: 15
-    property string shadowColor: Qt.darker(color, 1.5)
-    
+    id: interactiveButton
+
+    property string baseColor: Qt.darker("#ff3466", 1.1)
+    property double borderRadius: 20.0
+    property string buttonText: "Click Me"
+    property string textColor: "#ffffff"
+    property int textFontSize: 15
+
     signal buttonClicked()
-    
-    width: contentWrapper.width + contentWrapper.leftPadding + contentWrapper.rightPadding
-    height: contentWrapper.height + contentWrapper.topPadding + contentWrapper.bottomPadding
-    
-    //Pulse background
+
+    width: textLabel.width + textLabel.leftPadding + textLabel.rightPadding
+    height: textLabel.height + textLabel.topPadding + textLabel.bottomPadding
+
+    // Pulse effect background
     Rectangle {
         id: pulsingBackground
         anchors.fill: parent
-        color: Qt.lighter(root.color, 1.4)
-        radius: root.radius
+        color: Qt.lighter(interactiveButton.baseColor, 1.4)
+        radius: interactiveButton.borderRadius
         opacity: 0.8
-        
+
         ParallelAnimation {
             running: true
             loops: Animation.Infinite
-            
-            //Scale the background
             PropertyAnimation {
                 target: pulsingBackground
                 property: "scale"
                 to: 1.3
                 duration: 1300
             }
-            
-            //Reduce the opacity to fade-out
             NumberAnimation {
                 target: pulsingBackground
                 property: "opacity"
@@ -46,54 +41,49 @@ Item {
         }
     }
     
-    
-    //Background rectangle
-    Rectangle{
-        id: backgroundContainer
-        
+    // Static background
+    Rectangle {
+        id: background
         anchors.fill: parent
-        color: root.color
-        radius: root.radius
+        color: interactiveButton.baseColor
+        radius: interactiveButton.borderRadius
     }
     
-    //Content label
-    Label{
-        id: contentWrapper
-        
-        text: root.text
+    // Text label
+    Label {
+        id: textLabel
+        text: interactiveButton.buttonText
         anchors.centerIn: parent
         topPadding: 10
         bottomPadding: 10
         leftPadding: 20
         rightPadding: 20
-        font.pointSize: root.fontSize
-        color: root.textColor
+        font.pointSize: interactiveButton.textFontSize
+        color: interactiveButton.textColor
     }
     
-    //Handling Mouse Events
-    MouseArea{
-        id: mouseEventWrapper
-        
+    // Interaction area for mouse events
+    MouseArea {
+        id: interactionArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
         
-        onClicked: root.buttonClicked()
+        onClicked: interactiveButton.buttonClicked()
         onEntered: {
-            colorAnimation.to = Qt.darker(backgroundContainer.color, 1.1)
-            colorAnimation.start()
+            hoverEffect.to = Qt.darker(background.color, 1.1)
+            hoverEffect.start()
         }
         onExited: {
-            colorAnimation.to = root.color
-            colorAnimation.start()
+            hoverEffect.to = interactiveButton.baseColor
+            hoverEffect.start()
         }
     }
     
-    //Colour animation for hover effects
+    // Color animation for hover effects
     ColorAnimation {
-        id: colorAnimation
-        
-        target: backgroundContainer
+        id: hoverEffect
+        target: background
         property: "color"
         duration: 300
         easing.type: Easing.InOutQuad

@@ -3,77 +3,73 @@ import QtQuick.Controls.Basic
 import Qt5Compat.GraphicalEffects
 
 Item {
-    id: root
-    
-    property string color: "#3dccc7"
-    property double radius: 5.0
-    property string text: "Click Me"
-    property string textColor: "#fff"
-    property int fontSize: 15
-    property string shadowColor: Qt.darker(color, 1.6)
-    
+    id: hoverButton
+
+    property string baseColor: "#3dccc7"
+    property double borderRadius: 5.0
+    property string buttonText: "Click Me"
+    property string textColor: "#ffffff"
+    property int textFontSize: 15
+    property string shadowColor: Qt.darker(baseColor, 1.6)
+
     signal buttonClicked()
-    
-    width: contentWrapper.width + contentWrapper.leftPadding + contentWrapper.rightPadding
-    height: contentWrapper.height + contentWrapper.topPadding + contentWrapper.bottomPadding
-    
-    //Background rectangle
-    Rectangle{
-        id: backgroundContainer
-        
+
+    width: buttonLabel.width + buttonLabel.leftPadding + buttonLabel.rightPadding
+    height: buttonLabel.height + buttonLabel.topPadding + buttonLabel.bottomPadding
+
+    // Background with shadow effect
+    Rectangle {
+        id: buttonBackground
         anchors.fill: parent
-        color: root.color
-        radius: root.radius
-        
+        color: hoverButton.baseColor
+        radius: hoverButton.borderRadius
+
         layer.enabled: true
         layer.effect: DropShadow {
             transparentBorder: true
-            color: root.shadowColor
+            color: hoverButton.shadowColor
             radius: 15
             samples: 35
             horizontalOffset: 1
             verticalOffset: 1
         }
     }
-    
-    //Content label
-    Label{
-        id: contentWrapper
-        
-        text: root.text
+
+    // Text label
+    Label {
+        id: buttonLabel
+        text: hoverButton.buttonText
         anchors.centerIn: parent
         topPadding: 10
         bottomPadding: 10
         leftPadding: 20
         rightPadding: 20
-        font.pointSize: root.fontSize
-        color: root.textColor
+        font.pointSize: hoverButton.textFontSize
+        color: hoverButton.textColor
     }
-    
-    //Handling Mouse Events
-    MouseArea{
-        id: mouseEventWrapper
-        
+
+    // Mouse interaction area
+    MouseArea {
+        id: interactionArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
-        
-        onClicked: root.buttonClicked()
+
+        onClicked: hoverButton.buttonClicked()
         onEntered: {
-            colorAnimation.to = Qt.darker(backgroundContainer.color, 1.3)
-            colorAnimation.start()
+            hoverEffect.to = Qt.darker(buttonBackground.color, 1.3)
+            hoverEffect.start()
         }
         onExited: {
-            colorAnimation.to = root.color
-            colorAnimation.start()
+            hoverEffect.to = hoverButton.baseColor
+            hoverEffect.start()
         }
     }
-    
-    //Colour animation for hover effects
+
+    // Color animation for hover effects
     ColorAnimation {
-        id: colorAnimation
-        
-        target: backgroundContainer
+        id: hoverEffect
+        target: buttonBackground
         property: "color"
         duration: 300
         easing.type: Easing.InOutQuad

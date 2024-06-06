@@ -2,114 +2,102 @@ import QtQuick
 import QtQuick.Controls.Basic
 
 Item {
-    id: root
-    
-    property string bgColor: "#353535"
-    property string hoverBgColor: "#F7CA18"
-    property double radius: 5.0
-    property string text: "Click Me"
-    property string textColor: "#fff"
-    property string hoverTextColor: "#fff"
-    property int fontSize: 15
-    property string shadowColor: Qt.darker(color, 1.5)
+    id: clickableButton
+
+    property string baseColor: "#353535"
+    property string hoverColor: "#F7CA18"
+    property double borderRadius: 5.0
+    property string buttonText: "Click Me"
+    property string textColor: "#ffffff"
+    property string hoverTextColor: "#ffffff"
+    property int textFontSize: 15
+    property string shadowColor: Qt.darker(baseColor, 1.5)
     
     signal buttonClicked()
-    
-    width: contentWrapper.width + contentWrapper.leftPadding + contentWrapper.rightPadding
-    height: contentWrapper.height + contentWrapper.topPadding + contentWrapper.bottomPadding
-    
-    //Background rectangle
-    Rectangle{
-        id: backgroundContainer
-        
+
+    width: labelContent.width + labelContent.leftPadding + labelContent.rightPadding
+    height: labelContent.height + labelContent.topPadding + labelContent.bottomPadding
+
+    // Static background of the button
+    Rectangle {
+        id: background
         anchors.fill: parent
-        color: root.bgColor
-        radius: root.radius
-        border.color: root.hoverBgColor
+        color: clickableButton.baseColor
+        radius: clickableButton.borderRadius
+        border.color: clickableButton.hoverColor
         border.width: 3
     }
     
-    Rectangle{
-        id: backgroundHoverContainer
+    // Dynamic hover background effect
+    Rectangle {
+        id: hoverEffect
         height: parent.height
         width: 0
-        color: root.hoverBgColor
-        radius: root.radius
-        border.color: root.hoverBgColor
+        color: clickableButton.hoverColor
+        radius: clickableButton.borderRadius
+        border.color: clickableButton.hoverColor
         border.width: 3
     }
     
-    //Content label
-    Label{
-        id: contentWrapper
-        
-        text: root.text
+    // Label displaying button text
+    Label {
+        id: labelContent
+        text: clickableButton.buttonText
         anchors.centerIn: parent
         topPadding: 10
         bottomPadding: 10
         leftPadding: 20
         rightPadding: 20
-        font.pointSize: root.fontSize
-        color: root.textColor
+        font.pointSize: clickableButton.textFontSize
+        color: clickableButton.textColor
     }
     
-    //Handling Mouse Events
-    MouseArea{
-        id: mouseEventWrapper
-        
+    // Mouse area for interaction
+    MouseArea {
+        id: interactionArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
-        
-        onClicked: root.buttonClicked()
-        onEntered: {
-            hoverEnterAnimation.start()
-        }
-        onExited: {
-            hoverExitAnimation.start()
-        }
+
+        onClicked: clickableButton.buttonClicked()
+        onEntered: enterHoverAnimation.start()
+        onExited: exitHoverAnimation.start()
     }
     
-    //Animation for entering hover effects
+    // Animations for hover effect
     ParallelAnimation {
-        id: hoverEnterAnimation
+        id: enterHoverAnimation
         
-        //Scale the background
         ColorAnimation {
-            target: contentWrapper
+            target: labelContent
             property: "color"
-            to: root.hoverTextColor
+            to: clickableButton.hoverTextColor
             duration: 300
             easing.type: Easing.InOutQuad
         }
-        
-        //Sliding from the left
+
         NumberAnimation {
-            target: backgroundHoverContainer
+            target: hoverEffect
             property: "width"
-            to: backgroundContainer.width
+            to: background.width
             duration: 300
             easing.type: Easing.InOutQuad
         }
     }
     
-    
-    //Animation for exiting hover effects
     ParallelAnimation {
-        id: hoverExitAnimation
+        id: exitHoverAnimation
         
-        //Scale the background
         ColorAnimation {
-            target: contentWrapper
+            target: labelContent
             property: "color"
-            to: root.textColor
+            to: clickableButton.textColor
             duration: 300
             easing.type: Easing.InOutQuad
         }
-        
-        //Sliding from the left
+
         NumberAnimation {
-            target: backgroundHoverContainer
+            target: hoverEffect
             property: "width"
             to: 0
             duration: 300
