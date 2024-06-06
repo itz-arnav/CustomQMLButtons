@@ -27,7 +27,7 @@ To use these buttons in your QML application, follow these steps:
 	
 ## Example Usage
 
-	**CustomButton**
+1.	**CustomButton**
  
 		```
 		CustomButton {
@@ -35,7 +35,7 @@ To use these buttons in your QML application, follow these steps:
 			onButtonClicked: console.log("Plain Button Clicked!")
 		}
 		```
-	 **PulsingButton**
+2.	 **PulsingButton**
  
 		```
 		PulsingButton {
