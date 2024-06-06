@@ -2,6 +2,9 @@
 
 This repository contains a collection of custom animated buttons designed for Qt QML. These buttons are designed to enhance the user interface with various animation effects upon interactions like hovering, clicking, etc.
 
+![](https://github.com/itz-arnav/CustomQMLButtons/blob/main/proj.gif)
+
+
 ## Prerequisites
 
 Ensure you have the following installed:
