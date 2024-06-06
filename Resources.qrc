@@ -7,5 +7,6 @@
         <file>images/2.svg</file>
         <file>images/3.svg</file>
         <file>images/check.svg</file>
+        <file>images/logo.png</file>
     </qresource>
 </RCC>
