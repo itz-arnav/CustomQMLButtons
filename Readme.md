@@ -35,6 +35,8 @@ To use these buttons in your QML application, follow these steps:
 			onButtonClicked: console.log("Plain Button Clicked!")
 		}
 		```
+		
+		
 2.	 **PulsingButton**
  
 		```qml
