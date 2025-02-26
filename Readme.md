@@ -4,6 +4,8 @@ This repository contains a collection of custom animated buttons designed for Qt
 
 ![](https://github.com/itz-arnav/CustomQMLButtons/blob/main/proj.gif)
 
+https://www.youtube.com/watch?v=wKdwar_BcPQ&ab_channel=ArnabJha
+
 
 ## Prerequisites
 
